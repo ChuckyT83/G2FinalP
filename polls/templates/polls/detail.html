@@ -1,11 +1,14 @@
-<h1>{{ character.charName }}</h1>
-<ul>
-    <li>{{ character.race }}</li>
-    <li>{{ character.sex }}</li>
-    <li>{{ character.charClass }}</li>
-    <li>{{ character.goodOrBad }}</li>
-    <li>{{ character.weapons }}</li>
-    <li>{{ character.otherOne }}</li>
-    <li>{{ character.otherTwo }}</li>
-    <li>{{ character.otherThree }}</li>
-</ul>
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>{{ question.question }}</h1></legend>
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        {% for answer in question.answer_set.all %}
+            <input type="radio" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.answerOne }}">
+            <label for="answer{{ forloop.counter }}">{{ answer.answerOne }}</label><br>
+            <input type="radio" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.answerTwo }}">
+            <label for="answer{{ forloop.counter }}">{{ answer.answerTwo }}</label><br>
+        {% endfor %}
+    </fieldset>
+    <input type="submit" value="Vote">
+    </form>

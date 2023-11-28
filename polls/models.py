@@ -38,4 +38,12 @@ class Answer(models.Model):
     answerOne = models.CharField(max_length=30)
     answerTwo = models.CharField(max_length=30)
 
+class Choice(models.Model):
+    choiceOne = models.CharField(max_length=30)
+    choiceTwo = models.CharField(max_length=30)
+    choiceThree = models.CharField(max_length=30)
+    choiceFour = models.CharField(max_length=30)
+
+
+
 
