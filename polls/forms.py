@@ -1,7 +1,8 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, RadioSelect
 from .models import Question
 
-class CreatePollForm(ModelForm):
+class Ch(ModelForm):
     class Meta:
         model = Question
-        fields = ['question', 'answerOne', 'answerTwo']
+        fields = ['answerOne', 'answerTwo']
+        widget = RadioSelect()
