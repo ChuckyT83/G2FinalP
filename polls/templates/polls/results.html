@@ -1,9 +1,14 @@
 {% if question_list %}
-    <ul>
+    <table><tr>
     {% for question in question_list %}
-    <li>{{ question.question }}</a></li>
-    {% endfor %}
-    </ul>
+    <td>{{ question.question }}</td>
+    {% endfor %}</tr><tr>
+    {% for choice in choice_list %}
+    <td><center>{{ choice.choiceOne }}</center></td>
+    <td><center>{{ choice.choiceTwo }}</center></td>
+    <td><center>{{ choice.choiceThree }}</center></td>
+    <td><center>{{ choice.choiceFour }}</center></td>
+    {% endfor%}</tr></table>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}

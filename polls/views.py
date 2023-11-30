@@ -29,19 +29,17 @@ def detail(request, question_id):
             question_id = question_id + 1
             question = Question.objects.get(pk=question_id)
         except Question.DoesNotExist:
-            question_list = Question.objects.order_by("id")
-            questions = {"question_list": question_list}
-            return render(request, "polls/index.html", questions)
+            return results(request)
     return render(request, "polls/detail.html", {"question": question})
 
 def results(request):
     question_list = Question.objects.order_by("id")
-    choice_list = Choice.objects.get(id=1)
+    choice_list = Choice.objects.filter(user = 1).values()
     questions = {"question_list": question_list}
     choices = {"choice_list": choice_list}
     print(choices)
     print(choice_list)
-    return render(request, "polls/results.html", questions, choices)
+    return render(request, "polls/results.html", {"question_list": question_list, "choice_list": choice_list})
 
 def survey(request, question_id):
     try:
