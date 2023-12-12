@@ -1,0 +1,13 @@
+<form action="{% url 'polls:detail' question.id %}" method="post">
+    <fieldset>
+        {% csrf_token %}
+        <legend><h1>{{ question.question }}</h1></legend>
+        {% for answer in question.answer_set.all %}
+            <input type="radio" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.answerOne }}">
+            <label for="answer{{ forloop.counter }}">{{ answer.answerOne }}</label><br>
+            <input type="radio" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.answerTwo }}">
+            <label for="answer{{ forloop.counter }}">{{ answer.answerTwo }}</label><br>
+        {% endfor %}
+    </fieldset>
+    <input type="submit" value="Submit">
+    </form>
