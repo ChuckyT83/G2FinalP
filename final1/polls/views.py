@@ -46,18 +46,22 @@ def survey(request):
     choice = get_object_or_404(Choice, pk=choice_id)
     questions = Question.objects.all()
     print(questions)
+    
     if request.method=="POST":
-        choice.choiceOne = request.POST.get("answer1")
-        choice.choiceTwo = request.POST.get("answer2")
-        choice.choiceThree = request.POST.get("answer3")
-        choice.choiceFour = request.POST.get("answer4")
-        choice.choiceFive = request.POST.get("answer5")
-        choice.choiceSix = request.POST.get("answer6")
-        choice.choiceSeven = request.POST.get("answer7")
-        choice.choiceEight = request.POST.get("answer8")
-        choice.choiceNine = request.POST.get("answer9")
-        choice.save()
-        return compare(request)
+        try:
+            choice.choiceOne = request.POST.get("answer1")
+            choice.choiceTwo = request.POST.get("answer2")
+            choice.choiceThree = request.POST.get("answer3")
+            choice.choiceFour = request.POST.get("answer4")
+            choice.choiceFive = request.POST.get("answer5")
+            choice.choiceSix = request.POST.get("answer6")
+            choice.choiceSeven = request.POST.get("answer7")
+            choice.choiceEight = request.POST.get("answer8")
+            choice.choiceNine = request.POST.get("answer9")
+            choice.save()
+            return compare(request)
+        except:
+            return render(request, "polls/tryagain.html")
     return render(request, "polls/survey.html", {"questions": questions})
 
 def vote(request, question_id):
