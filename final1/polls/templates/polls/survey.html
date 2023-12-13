@@ -1,2 +1,41 @@
-{for question in questions %}
-    <h1>{{ questions.question }}</h1>
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+<form action="{% url 'polls:survey' %}" method="post">
+
+{% csrf_token %}
+{% for question in questions %}
+<fieldset>
+    <h3>{{ forloop.counter }}. {{ question.question }}</h3>
+    {% if forloop.counter == 7 or forloop.counter == 8 or forloop.counter == 9 %}
+        <select name="answer{{ forloop.counter }}" id="answer{{ forloop.counter }}">
+            <option value="{{ question.answerOne }}">{{ question.answerOne }}</option>
+            <option value="{{ question.answerTwo }}">{{ question.answerTwo }}</option>
+            <option value="{{ question.answerThree }}">{{ question.answerThree }}</option>
+            <option value="{{ question.answerFour }}">{{ question.answerFour }}</option>
+            <option value="{{ question.answerFive }}">{{ question.answerFive }}</option>
+            <option value="{{ question.answerSix }}">{{ question.answerSix }}</option>
+            <option value="{{ question.answerSeven }}">{{ question.answerSeven }}</option>
+        </select>
+    {% else %}
+        <input type="radio" name="answer{{ forloop.counter }}" id="answer{{ forloop.counter }}" value="{{ question.answerOne }}">
+        <label for="answer{{ forloop.counter }}">{{ question.answerOne }}</label><br>
+        <input type="radio" name="answer{{ forloop.counter }}" id="answer{{ forloop.counter }}" value="{{ question.answerTwo }}">
+        <label for="answer{{ forloop.counter }}">{{ question.answerTwo }}</label><br>
+
+        {% if question.answerThree != "0" %}
+            <input type="radio" name="answer{{ forloop.counter }}" id="answer{{ forloop.counter }}" value="{{ question.answerThree }}">
+            <label for="answer{{ forloop.counter }}">{{ question.answerThree }}</label><br>
+            <input type="radio" name="answer{{ forloop.counter }}" id="answer{{ forloop.counter }}" value="{{ question.answerFour }}">
+            <label for="answer{{ forloop.counter }}">{{ question.answerFour }}</label><br>
+        {% endif %}
+
+    {% endif %}
+
+</fieldset>
+{% endfor %}
+<input type="submit" value="Submit">
+</form>
+
+{% endblock %}

@@ -5,9 +5,7 @@ from django.urls import reverse
 from .models import Character, Question, Answer, Choice
 
 def index(request):
-    question_list = Question.objects.order_by("id")
-    context = {"question_list": question_list}
-    return render(request, "polls/index.html", context)
+    return render(request, "polls/index.html")
 
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -42,12 +40,25 @@ def results(request):
     print(choice_list)
     return render(request, "polls/results.html", {"question_list": question_list, "choice_list": choice_list})
 
-def survey(request, question_id):
-    try:
-        question = Question.objects.get(pk=question_id)
-    except Question.DoesNotExist:
-        raise Http404("Question does not exist")
-    return render(request, "polls/survey.html", {"question": question})
+def survey(request):
+    current_user = request.user
+    choice_id = current_user.id
+    choice = get_object_or_404(Choice, pk=choice_id)
+    questions = Question.objects.all()
+    print(questions)
+    if request.method=="POST":
+        choice.choiceOne = request.POST.get("answer1")
+        choice.choiceTwo = request.POST.get("answer2")
+        choice.choiceThree = request.POST.get("answer3")
+        choice.choiceFour = request.POST.get("answer4")
+        choice.choiceFive = request.POST.get("answer5")
+        choice.choiceSix = request.POST.get("answer6")
+        choice.choiceSeven = request.POST.get("answer7")
+        choice.choiceEight = request.POST.get("answer8")
+        choice.choiceNine = request.POST.get("answer9")
+        choice.save()
+        return compare(request)
+    return render(request, "polls/survey.html", {"questions": questions})
 
 def vote(request, question_id):
     choice_id = 1
@@ -57,17 +68,15 @@ def vote(request, question_id):
     choice.choiceOne = answer
     return HttpResponse(request, "polls/index.html")
 
-
-
 def compare(request):
     current_user = request.user
     choice_id = current_user.id
-    choices = Choice.objects.values_list("choiceOne","choiceTwo", "choiceThree", "choiceFour").get(id=choice_id)
+    choices = Choice.objects.values_list("choiceOne","choiceTwo", "choiceThree", "choiceFour", "choiceFive", "choiceSix", "choiceSeven","choiceEight","choiceNine").get(id=choice_id)
     print(choices)
     countList = []
-    for i in range(4):
+    for i in range(27):
         character_id = i+1
-        characterTraits = Character.objects.values_list("race",'goodOrBad',"sex","support").get(id=character_id)
+        characterTraits = Character.objects.values_list("human",'goodOrBad',"sex","support","range","weapons","otherOne","otherTwo","otherThree").get(id=character_id)
         countList.append(sum(x==y for x, y in zip(choices, characterTraits)))
         print(list(zip(choices, characterTraits)))
         print(countList)

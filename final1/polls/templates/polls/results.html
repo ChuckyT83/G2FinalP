@@ -1,3 +1,7 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
 {% if question_list %}
     <table><tr>
     {% for question in question_list %}
@@ -12,3 +16,5 @@
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+
+{% endblock %}
