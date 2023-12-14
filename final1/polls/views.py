@@ -28,7 +28,7 @@ def survey(request):
             return compare(request)
         except:
             return render(request, "polls/tryagain.html")
-        
+            
     return render(request, "polls/survey.html", {"questions": questions})
 
 def compare(request):
@@ -36,8 +36,9 @@ def compare(request):
     choice_id = current_user.id
     choices = Choice.objects.values_list("choiceOne","choiceTwo", "choiceThree", "choiceFour", "choiceFive", "choiceSix", "choiceSeven","choiceEight","choiceNine").get(id=choice_id)
     countList = []
+    characterCount = Character.objects.all().count()
 
-    for i in range(27): 
+    for i in range(characterCount): 
         #itterates through the character list and compares each character to the choices made by the user
         #then stores a count of each matching choice in a list.
         character_id = i+1
