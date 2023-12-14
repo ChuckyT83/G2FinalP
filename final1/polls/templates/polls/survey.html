@@ -9,10 +9,11 @@
     <form action="{% url 'polls:survey' %}" method="post">
     {% csrf_token %}
     {% for question in questions %}
-    <fieldset class="content">
-        <h3>{{ forloop.counter }}. {{ question.question }}</h3>
 
-        {% if forloop.counter >= 6 %}
+    <fieldset class="content">
+        {# for loop that itterates through the question context to create the survey#}
+        <h3>{{ forloop.counter }}. {{ question.question }}</h3> {# prints the question number and the question #}
+        {% if forloop.counter >= 6 %} {# the last four questions have seven total options so they must be rendered differently #}
             <select name="answer{{ forloop.counter }}" id="answer{{ forloop.counter }}" required>
                 <option value="{{ question.answerOne }}">{{ question.answerOne }}</option>
                 <option value="{{ question.answerTwo }}">{{ question.answerTwo }}</option>
@@ -22,20 +23,12 @@
                 <option value="{{ question.answerSix }}">{{ question.answerSix }}</option>
                 <option value="{{ question.answerSeven }}">{{ question.answerSeven }}</option>
             </select>
-            
+
         {% else %}
             <input type="radio" name="answer{{ forloop.counter }}" id="answer{{ forloop.counter }}" value="{{ question.answerOne }}" required>
             <label for="answer{{ forloop.counter }}">{{ question.answerOne }}</label><br>
             <input type="radio" name="answer{{ forloop.counter }}" id="answer{{ forloop.counter }}" value="{{ question.answerTwo }}" required>
             <label for="answer{{ forloop.counter }}">{{ question.answerTwo }}</label><br>
-
-            {% if question.answerThree != "0" %}
-                <input type="radio" name="answer{{ forloop.counter }}" id="answer{{ forloop.counter }}" value="{{ question.answerThree }}" required>
-                <label for="answer{{ forloop.counter }}">{{ question.answerThree }}</label><br>
-                <input type="radio" name="answer{{ forloop.counter }}" id="answer{{ forloop.counter }}" value="{{ question.answerFour }}" required>
-                <label for="answer{{ forloop.counter }}">{{ question.answerFour }}</label><br>
-            {% endif %}
-
         {% endif %}
 
     </fieldset>
