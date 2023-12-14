@@ -1,20 +1,36 @@
-{% extends 'polls/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Who to play as?</title>
+<link rel="stylesheet" href="survey.css">
+</head>
 
-{% block content %}
+<body>
+    <header id="title">
+        <h1>
+            Welcome to the quiz
+        </h1>
+    </header> 
+  {% extends 'polls/base.html' %}
 
-{% if question_list %}
-    <table><tr>
-    {% for question in question_list %}
-    <td>{{ question.question }}</td>
-    {% endfor %}</tr><tr>
-    {% for choice in choice_list %}
-    <td><center>{{ choice.choiceOne }}</center></td>
-    <td><center>{{ choice.choiceTwo }}</center></td>
-    <td><center>{{ choice.choiceThree }}</center></td>
-    <td><center>{{ choice.choiceFour }}</center></td>
-    {% endfor%}</tr></table>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+    {% block content %}
 
-{% endblock %}
+    {% if question_list %}
+        <table><tr>
+        {% for question in question_list %}
+        <td>{{ question.question }}</td>
+        {% endfor %}</tr><tr>
+        {% for choice in choice_list %}
+        <td><center>{{ choice.choiceOne }}</center></td>
+        <td><center>{{ choice.choiceTwo }}</center></td>
+        <td><center>{{ choice.choiceThree }}</center></td>
+        <td><center>{{ choice.choiceFour }}</center></td>
+        {% endfor%}</tr></table>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+
+    {% endblock %}
+</body>
+</html>

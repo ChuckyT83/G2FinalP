@@ -1,9 +1,14 @@
-{% extends 'polls/base.html' %}
+    {% extends 'polls/base.html' %}
+    {% block content %}
 
-{% block content %}
+    <header id="title">
+        <h1>
+            Results
+        </h1>
+    </header>
 
-<h2>You should play as: </h2>
-<h1>{{ charPick }}</h1><br>
-<a href = "../">Try again?</a>
+    <h2>You should play as: </h2>
+    <h1>{{ charPick }}</h1><br>
+    <a href = "../">Try again?</a>
 
-{% endblock %}
+    {% endblock %}
