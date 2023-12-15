@@ -1,17 +1,25 @@
 {% extends 'polls/base.html' %}
 {% block content %}
     
-        <header id="title">
-            <h1>
-                Welcome to the quiz
-            </h1>
-        </header> 
+<header id="title">
+    <h1>
+        Welcome to the quiz
+    </h1>
+</header> 
+<div>
+    <p>This survey is for people interested in trying out League of Legends for the first time.
+    You will answer some personality questions and it will suggest a character for you. This survey is purely for fun and uses superficial character and personality traits which have no impact on how the character plays. If you don't like the character it picked for you, try it again! 
+    </p>
+</div>
+{% if not user.is_authenticated %}
+    <a href="{% url 'login' %}">LOGIN</a><br>
+    <a href="{% url 'polls:register' %}">REGISTER</a>    
+{% else %}
+<div>Welcome, {{ user.get_username }}</div>
+    <a href="{% url 'polls:survey' %}">TAKE THE SURVEY</a>
+    <a href="{% url 'polls:logout' %}">LOGOUT</a>
 
-        <h3><a href="{% url 'polls:survey' %}">Click here to take the survey.</a></h3>
-        <div> <!--WIll put id in individual questions later -->
-            <p>This survey is for people interested in trying out League of Legends for the first time.
-            You will answer some personality questions and it will suggest a character for you. This survey is purely for fun and uses superficial character and personality traits which have no impact on how the character plays. If you don't like the character it picked for you, try it again! 
-            </p>
-        </div>
+{% endif %}
+
 
 {% endblock %}

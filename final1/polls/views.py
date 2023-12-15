@@ -1,16 +1,23 @@
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
+#from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from .forms import CustomUserForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import logout
 
 from .models import Character, Question, Answer, Choice
 
 def index(request):
     return render(request, "polls/index.html")
 
+@login_required
 def survey(request):
     current_user = request.user
     choice_id = current_user.id
-    choice = get_object_or_404(Choice, pk=choice_id)
+    try:
+        choice = get_object_or_404(Choice, user=current_user)
+    except:
+        choice = Choice.objects.create(user=current_user)
     questions = Question.objects.all()
     
     if request.method=="POST":
@@ -31,10 +38,11 @@ def survey(request):
             
     return render(request, "polls/survey.html", {"questions": questions})
 
+@login_required
 def compare(request):
     current_user = request.user
-    choice_id = current_user.id
-    choices = Choice.objects.values_list("choiceOne","choiceTwo", "choiceThree", "choiceFour", "choiceFive", "choiceSix", "choiceSeven","choiceEight","choiceNine").get(id=choice_id)
+
+    choices = Choice.objects.values_list("choiceOne","choiceTwo", "choiceThree", "choiceFour", "choiceFive", "choiceSix", "choiceSeven","choiceEight","choiceNine").get(user=current_user)
     countList = []
     characterCount = Character.objects.all().count()
 
@@ -51,3 +59,21 @@ def compare(request):
 
 def tryAgain(request):
     return render(request, "polls/tryagain.html")
+
+
+def register(request):
+    if request.method != 'POST':
+        form = CustomUserForm()
+    else:
+        form = CustomUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'registration/login.html')
+
+    context = {'form': form}
+
+    return render(request, 'polls/register.html', context)
+
+def logoutRequest(request):
+    logout(request)
+    return render(request, "polls/index.html")

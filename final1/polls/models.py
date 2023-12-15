@@ -1,8 +1,7 @@
-import datetime
-
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 # Create your models here.
 
 class Character(models.Model):
@@ -49,15 +48,16 @@ class Answer(models.Model):
 
 class Choice(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    choiceOne = models.CharField(max_length=30)
-    choiceTwo = models.CharField(max_length=30)
-    choiceThree = models.CharField(max_length=30)
-    choiceFour = models.CharField(max_length=30)
-    choiceFive = models.CharField(max_length=30)
-    choiceSix = models.CharField(max_length=30)
-    choiceSeven = models.CharField(max_length=30)
-    choiceEight = models.CharField(max_length=30)
-    choiceNine = models.CharField(max_length=30)
+    choiceOne = models.CharField(max_length=30, default='0')
+    choiceTwo = models.CharField(max_length=30, default='0')
+    choiceThree = models.CharField(max_length=30, default='0')
+    choiceFour = models.CharField(max_length=30, default='0')
+    choiceFive = models.CharField(max_length=30, default='0')
+    choiceSix = models.CharField(max_length=30, default='0')
+    choiceSeven = models.CharField(max_length=30, default='0')
+    choiceEight = models.CharField(max_length=30, default='0')
+    choiceNine = models.CharField(max_length=30, default='0')
 
     def __str__(self):
         return self.user.username
+
