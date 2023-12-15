@@ -1,15 +1,33 @@
-Group 2: Layla Nettaavong Charles Tranter Gautam Mehla
+# League of Legends Character Quiz
 
-Final Project Summary and Plan
+# Description
+Welcome to the League of Legends Character Quiz! This Python project is designed to provide users with a fun and interactive quiz that matches their criteria to a character from the popular game League of Legends.
 
-Communication and URLs
+# Features
+- Answer a series of simple questions
+- Get matched with a League of Legends character based on your answers
+# Installation
 
-We have agreed to communicate to each other via discord. We do small summaries and check ups throughout the day while big check ups are done after class and/or after a task is complete.  Our Github link is here and our trello link is there .
+Download the repoistory to your computer directory or access the quiz through the provided link.
 
-Final Project Summary
+# navigate to the project directory:
+cd "name of the directory"
 
-Our final project will be a small quiz game, where users have to answer questions based on their video game preferences and styles. The end result will calculate the type of character that user should play as. The front-end simply looks like various questions that save the answers for a sort-of calculator to look at. The back-end will have a list of character types and thier uses, with one character being chosen based on the user's answers.
+# Install dependencies:
+pip install -r requirements.txt
 
-Team Roles and Responsibilities
+# Run the quiz using the command:
+pyhton manage.py runserver
 
-Each member has equal responsibility in terms of main coding. Charles Tranter is responsible for … Gautam Mehla is responsible for … and Layla Nettavongis responsible for …
+Answer the questions presented in the console.
+Receive the League of Legends character that matches your criteria.
+
+# Group Members:
+Layla Nettaavong 
+Charles Tranter
+Gautam Mehla
+
+# About the Group
+Layla Nettaavong was the designated Group Leader who managed the meetings, roles and the overall group progess while also helping in the front web and graphical area of the quiz.
+Charles Tranter was responsible for the quiz, he handled majority of the coding, mechanics and how the programneeds to work.
+Gautam Mehla was responsible for the content of the quiz, the question, character data and parts of coding whereever required.
