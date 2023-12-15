@@ -6,8 +6,11 @@ Welcome to the League of Legends Character Quiz! This Python project is designed
 # Features
 - Answer a series of simple questions
 - Get matched with a League of Legends character based on your answers
-# Installation
 
+# How to Play
+You will be given the option to login, register, or take the quiz. Taking the quiz without an account will not save your results, but you can still take the quiz normally. Simply click on the options and use the arrow keys to choose your answer. If you wish to save your results, login to your account with the login, if you do not have an account you can make one with the register option. 
+  
+# Installation
 Download the repoistory to your computer directory or access the quiz through the provided link.
 
 # navigate to the project directory:
