@@ -9,7 +9,7 @@ Welcome to the League of Legends Character Quiz! This Python project is designed
 
 # How to Play
 Go to the following link: https://group2finalp.pythonanywhere.com/
-You will be taken to the homepage where you can either reigster an account or login, if you do not have an account your progress won't be saved (As of right now you can't actually see your characer results). Once you login, you can take the quiz by selecting the question options and using the arrow keys to choose your specific answers.
+You will be taken to the homepage where you can either reigster an account or login, if you do not have an account your progress won't be saved. Once you login, you can take the quiz by selecting the question options and using the arrow keys to choose your specific answers.
   
 # Installation
 Download the repoistory to your computer directory or access the quiz through the provided link.
