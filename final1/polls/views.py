@@ -41,7 +41,10 @@ def survey(request):
 @login_required
 def compare(request):
     current_user = request.user
-    choices = Choice.objects.values_list("choiceOne","choiceTwo", "choiceThree", "choiceFour", "choiceFive", "choiceSix", "choiceSeven","choiceEight","choiceNine").get(user=current_user)
+    try:
+        choices = Choice.objects.values_list("choiceOne","choiceTwo", "choiceThree", "choiceFour", "choiceFive", "choiceSix", "choiceSeven","choiceEight","choiceNine").get(user=current_user)
+    except:
+        return render(request, "polls/tryagain.html")
     countList = []
     characterCount = Character.objects.all().count()
 
