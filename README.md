@@ -1,7 +1,7 @@
 # League of Legends Character Quiz
 
 # Description
-Welcome to the League of Legends Character Quiz! This Python project is designed to provide users with a fun and interactive quiz that matches their criteria to a character from the popular game League of Legends.
+Welcome to the League of Legends Character Quiz! This Python project is designed to provide users with a fun and interactive quiz that matches their criteria to a character from the popular game League of Legends. (For some reason, if you click login, the admin information is already available, but you can just delete it and implement your own account. This account does not actually allow you to look at other user information)
 
 # Features
 - Answer a series of simple questions
