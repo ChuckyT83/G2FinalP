@@ -16,8 +16,9 @@
     <a href="{% url 'polls:register' %}">REGISTER</a>    
 {% else %}
 <div>Welcome, {{ user.get_username }}</div>
-    <a href="{% url 'polls:survey' %}">TAKE THE SURVEY</a>
-    <a href="{% url 'polls:logout' %}">LOGOUT</a>
+    <a href="{% url 'polls:survey' %}">TAKE THE SURVEY</a><br>
+    <a href="{% url 'polls:logout' %}">LOGOUT</a><br>
+    <a href="{% url 'polls:compare' %}">CHECK YOUR LAST RESULT</a>
 
 {% endif %}
 

@@ -11,8 +11,10 @@
     <h5>{{form.password1.label}}</h5>
     {{form.password1}}
     <h5>{{form.password2.label}}</h5>
-    {{form.password2}}
-    <input type="submit" name="Create User">
+    {{form.password2}}<br>
+    Your password must be at least 8 characters, must not be entirely numbers, may not match your username, and not be common words.
+    <br>
+    <input type="submit" value="Create User">
 </form>
 
 {% endblock %}

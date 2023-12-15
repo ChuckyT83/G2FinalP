@@ -1,25 +1,24 @@
-#from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserForm
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout
 
-from .models import Character, Question, Answer, Choice
+from .models import Character, Question, Choice
 
 def index(request):
     return render(request, "polls/index.html")
 
+#loads the survey template that renders the questions for the survey
 @login_required
 def survey(request):
     current_user = request.user
-    choice_id = current_user.id
     try:
         choice = get_object_or_404(Choice, user=current_user)
     except:
         choice = Choice.objects.create(user=current_user)
     questions = Question.objects.all()
     
+    #saves the users choices to their associated choice model in the database
     if request.method=="POST":
         try:
             choice.choiceOne = request.POST.get("answer1")
@@ -38,10 +37,10 @@ def survey(request):
             
     return render(request, "polls/survey.html", {"questions": questions})
 
+#compares the user's choices to the characters in the character model database then displays the result
 @login_required
 def compare(request):
     current_user = request.user
-
     choices = Choice.objects.values_list("choiceOne","choiceTwo", "choiceThree", "choiceFour", "choiceFive", "choiceSix", "choiceSeven","choiceEight","choiceNine").get(user=current_user)
     countList = []
     characterCount = Character.objects.all().count()
@@ -52,15 +51,17 @@ def compare(request):
         character_id = i+1
         characterTraits = Character.objects.values_list("human",'goodOrBad',"sex","support","range","weapons","otherOne","otherTwo","otherThree").get(id=character_id)
         countList.append(sum(x==y for x, y in zip(choices, characterTraits))) #compares each choice with character traits and gives a sum of total matches
-    characterIndex = max(range(len(countList)), key=countList.__getitem__) + 1 #finds the index of the highest match count in the comparison list
+    characterIndex = max(range(len(countList)), key=countList.__getitem__) + 1 #finds the index of the highest match count in the comparison list. 
+    #This is suboptimal as it doesn't account for results that have the same value and just pulls the first index.
     charPick = Character.objects.values_list("charName", flat = True).get(id=characterIndex) #pulls the character that matches the index
 
     return render(request, "polls/compare.html", {"charPick": charPick})
 
+#renders a pages if there is an issue with saving the users results to the database
 def tryAgain(request):
     return render(request, "polls/tryagain.html")
 
-
+#allos the users to register an account
 def register(request):
     if request.method != 'POST':
         form = CustomUserForm()
